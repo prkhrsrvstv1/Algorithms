@@ -1,0 +1,6 @@
+POLYNOMIAL (A,x)
+n = A.length
+value = A[n+1]
+for i = n downto 1
+    value = A[i] + x*value
+return value
