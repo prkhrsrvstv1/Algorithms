@@ -1,0 +1,10 @@
+SWAP (A,one,two)
+A[one] = A[one]+A[two]
+A[two] = A[one]-A[two]
+A[one] = A[one]-A[two]
+
+BUBBLE-SORT (A)
+for i = 1 to A.length
+    for j = 1 to i
+        if A[j] > A[j+1]
+            SWAP(A,j,j+1)
