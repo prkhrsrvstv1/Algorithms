@@ -1,0 +1,23 @@
+MERGE (A,start,end,mid)
+L, R  = []
+L = A[start...mid]
+R = A[mid+1...end]
+L.append(+inf)
+R.append(+inf)
+leftHead = start
+rightHead = mid+1
+for i = start to end
+    if L[leftHead] < R[rightHead]
+        A[i] = L[leftHead]
+        leftHead = leftHead+1
+    else
+        A[i] = R[rightHead]
+        rightHead = rightHead+1
+
+MERGE-SORT (A,start,end)
+if start == end
+    return
+mid = floor((start+end)/2)
+MERGE-SORT(A,start,mid)
+MERGE-SORT(A,mid+1,end)
+MERGE(A,start,end,mid)
