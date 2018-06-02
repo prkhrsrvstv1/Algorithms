@@ -1,4 +1,6 @@
-#include<iostream.h>
+#include<iostream>
+
+using namespace std;
 
 int A[] = {2,89,96,4,49,77,145,257,114,24,84,6,711,517,3,66,64,89};
 int size = 18;
@@ -23,19 +25,22 @@ void print_array(int *A) {
 
 void selection_sort(int * A) {
     if (size == 1) {
-        return();
+        return;
     }
     int min;
     for(int i = 0; i < size-1; i++) {
-        min = A[i];
-        for(int j = i; j < size; j++) {
-            if(A[j] < min) {
+        min = i;
+        int j;
+        for(j = i; j < size; j++) {
+            if(A[j] < A[min]) {
                 min = j;
             }
         }
-        A[i] += A[j];
-        A[j] = A[i] - A[j];
-        A[i] = A[i] - A[j];
+        if(i != min) {
+            A[i] += A[min];
+            A[min] = A[i] - A[min];
+            A[i] = A[i] - A[min];
+        }
     }
-    return();
+    return;
 }
