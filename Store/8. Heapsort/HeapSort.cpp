@@ -24,15 +24,15 @@ class Heap {
             return(2 * i + 1);
         }
 
-        virtual void heapify() {}
-
-        virtual void build_heap() {}
-
         void print_heap() {
             for(int i = 0; i < heap_size; i++)
                 cout << A[i] << " ";
             cout << "\n";
         }
+
+        virtual void heapify() {}
+
+        virtual void build_heap() {}
 
 };
 
@@ -67,6 +67,7 @@ class MaxHeap: public Heap {
             for(int i = heap_size / 2; i >= 0; --i)
                 heapify(i);
         }
+
 };
 
 class MinHeap: public Heap {
