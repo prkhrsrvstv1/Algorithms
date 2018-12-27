@@ -7,15 +7,26 @@ int size = 16;
 
 class Heap {
 
-    private:
+    protected:
         int *A;
         int heap_size;
     
     public:
-        Heap(int *arr, int size) {
-            A = arr;
-            heap_size = size;
+        inline int parent(int i) {
+            return(i / 2);
         }
+        
+        inline int left(int i) {
+            return(2 * i);
+        }
+
+        inline int right(int i) {
+            return(2 * i + 1);
+        }
+
+        virtual void heapify() {}
+
+        virtual void build_heap() {}
 
         void print_heap() {
             for(int i = 0; i < heap_size; i++)
@@ -25,7 +36,73 @@ class Heap {
 
 };
 
+class MaxHeap: public Heap {
+    public:
+        MaxHeap(int *arr, int size) {
+            this->build_heap(arr, size);
+            this->heap_size = size;
+        }
+
+        void heapify(int i) {
+            int l = left(i);
+            int r = right(i);
+            int largest = i;
+            if (l < heap_size && A[l] > A[i])
+                largest = l;
+            if(r < heap_size && A[r] > A[largest])
+                largest = r;
+            if(largest != i) {
+                swap(A[largest], A[i]);
+                heapify(largest);
+            }
+        }
+
+        void build_heap(int *arr, int size) {
+            if(size > MAX_HEAP_SIZE) {
+                cout << "ERROR. Array too large.\n";
+                return;
+            }
+            A = arr;
+            heap_size = size;
+            for(int i = heap_size / 2; i >= 0; --i)
+                heapify(i);
+        }
+};
+
+class MinHeap: public Heap {
+    public:
+        MinHeap(int *arr, int size) {
+            this->build_heap(arr, size);
+            this->heap_size = size;
+        }
+
+        void heapify(int i) {
+            int l = left(i);
+            int r = right(i);
+            int smallest = i;
+            if (l < heap_size && A[l] < A[i])
+                smallest = l;
+            if(r < heap_size && A[r] < A[smallest])
+                smallest = r;
+            if(smallest != i) {
+                swap(A[smallest], A[i]);
+                heapify(smallest);
+            }
+        }
+
+        void build_heap(int *arr, int size) {
+            if(size > MAX_HEAP_SIZE) {
+                cout << "ERROR. Array too large.\n";
+                return;
+            }
+            A = arr;
+            heap_size = size;
+            for(int i = heap_size / 2; i >= 0; --i)
+                heapify(i);
+        }
+};
+
 int main() {
-    Heap* heap = new Heap(::B, ::size);
-    heap->print_heap();
+    MinHeap* minheap = new MinHeap(::B, ::size);
+    minheap->print_heap();
 }
