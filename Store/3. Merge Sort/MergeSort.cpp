@@ -18,7 +18,7 @@ int main() {
 }
 
 void print_array(int *A) {
-    for(int i = 0, int, int; i < size; i++)
+    for(int i = 0; i < size; i++)
         cout<<A[i]<<' ';
     cout<<'\n';
 }
